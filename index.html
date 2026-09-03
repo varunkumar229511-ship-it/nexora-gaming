@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+body {
+  background-color: gray;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: #171d26;
+  border-bottom: 1px solid #232a35;
+  position: relative;
+}
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.menu-wrapper {
+  position: relative;
+}
+.menu-btn {
+  background: none;
+  border: none;
+  color: #e8ecf1;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4fd1c5;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 42px;
+  left: 0;
+  background: #171d26;
+  border: 1px solid #232a35;
+  border-radius: 8px;
+  min-width: 160px;
+}
+
+.dropdown.show {
+  display: block;
+}
+.dropdown a {
+  display: block;
+  padding: 12px 16px;
+  color: #e8ecf1;
+  text-decoration: none;
+}
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.search-btn {
+  background: none;
+  border: 1px solid #232a35;
+  color: #e8ecf1;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+.login-btn {
+  background: #4fd1c5;
+  border: none;
+  color: #10141a;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.hero {
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #10141a;
+  padding: 40px 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: #4fd1c5;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  color: #b8c0cc;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 25px;
+}
+
+.play-btn {
+  background: #4fd1c5;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.games {
+  padding: 50px 24px;
+  background: #171d26;
+  text-align: center;
+}
+
+.games h2 {
+  color: #e8ecf1;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.game-card {
+  width: 250px;
+  background: #10141a;
+  border: 1px solid #232a35;
+  border-radius: 12px;
+  padding: 18px;
+  text-align: left;
+}
+
+.game-image {
+  height: 140px;
+  background: #232a35;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+}
+.game-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.game-card h3 {
+  color: #4fd1c5;
+  margin: 15px 0 8px;
+}
+
+.game-card p {
+  color: #9ca6b5;
+}
+
+.game-card button {
+  background: #4fd1c5;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.game-card {
+  transition: 0.3s;
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  border-color: #4fd1c5;
+}
+.game-card button:hover {
+  opacity: 0.8;
+}
+.game-card {
+  transition: 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.game-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(79, 209, 197, 0.15);
+}
+
+.game-card button {
+  transition: 0.3s ease;
+}
+
+.game-card button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+.search-input {
+  background: #10141a;
+  border: 1px solid #232a35;
+  color: #e8ecf1;
+  padding: 9px 14px;
+  border-radius: 8px;
+  outline: none;
+  width: 160px;
+}
+
+.search-input:focus {
+  border-color: #4fd1c5;
+}
+.login-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-box {
+  position: relative;
+  width: 320px;
+  background: #171d26;
+  border: 1px solid #232a35;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+}
+
+.login-box h2 {
+  color: #4fd1c5;
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px;
+  margin: 8px 0;
+  background: #10141a;
+  border: 1px solid #232a35;
+  border-radius: 7px;
+  color: white;
+  outline: none;
+}
+
+.login-box button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 11px;
+  background: #4fd1c5;
+  border: none;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  color: #e8ecf1;
+  font-size: 25px;
+  cursor: pointer;
+}
+.details-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.details-box {
+  position: relative;
+  width: 420px;
+  background: #171d26;
+  border: 1px solid #4fd1c5;
+  border-radius: 14px;
+  padding: 30px;
+  color: #e8ecf1;
+}
+
+.details-box h2 {
+  color: #4fd1c5;
+  margin-top: 0;
+}
+
+.details-box p {
+  line-height: 1.6;
+  color: #b8c0cc;
+}
+
+.details-info {
+  margin-top: 20px;
+}
+
+.details-info strong {
+  color: #e8ecf1;
+}
+
+.details-box button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #4fd1c5;
+  border: none;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.details-close {
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  font-size: 28px;
+  cursor: pointer;
+}
+.details-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.details-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about {
+  padding: 60px 24px;
+  background: #10141a;
+  text-align: center;
+}
+
+.about h2 {
+  color: #4fd1c5;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.about > p {
+  color: #b8c0cc;
+  max-width: 650px;
+  margin: 0 auto 35px;
+  line-height: 1.6;
+}
+
+.about-features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  width: 220px;
+  padding: 20px;
+  background: #171d26;
+  border: 1px solid #232a35;
+  border-radius: 12px;
+}
+
+.feature h3 {
+  color: #e8ecf1;
+}
+
+.feature p {
+  color: #9ca6b5;
+  line-height: 1.5;
+}
+.footer {
+  background: #171d26;
+  border-top: 1px solid #232a35;
+  padding: 45px 24px 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.footer h2 {
+  color: #4fd1c5;
+}
+
+.footer h3 {
+  color: #e8ecf1;
+}
+
+.footer p {
+  color: #9ca6b5;
+}
+
+.footer a {
+  display: block;
+  color: #9ca6b5;
+  text-decoration: none;
+  margin: 8px 0;
+}
+
+.footer a:hover {
+  color: #4fd1c5;
+}
+
+.footer-bottom {
+  border-top: 1px solid #232a35;
+  margin-top: 30px;
+  padding-top: 18px;
+  text-align: center;
+}
+#games {
+  display: none;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="menu-wrapper">
+  <button class="menu-btn"                      onclick="toggleMenu()">⋮</button>
+  
+  <div class="dropdown" id="dropdown-menu">
+  <a href="#home">Home</a>
+  <a href="#games">Games</a>
+  <a href="#about">About</a>
+</div>
+  
+  <span class="logo">Nexora Gaming</span>
+</div>
+<div class="right-actions">
+<input
+  type="text"
+  id="searchInput"
+  class="search-input"
+  placeholder="Search games..."
+  onkeyup="searchGames()"
+>
+<button class="login-btn" onclick="openLogin()">Login</button></div>
+</header>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Welcome to Nexora Gaming</h1>
+    <p>Discover games, explore new worlds and level up your gaming experience.</p>
+    <button class="play-btn" onclick="openLogin()">
+  Explore Games
+</button>
+  </div>
+</section>
+<section class="games" id="games">
+  <h2>Popular Games</h2>
+
+  <div class="game-container">
+
+    <div class="game-card">
+    <div class="game-image">
+  <img src="https://wallpaperbat.com/img/188448469-cyber-night-city.jpg" alt="Cyber Strike">
+</div>
+      <h3>Cyber Strike</h3>
+      <p>Action • Multiplayer</p>
+      <button>Play Now</button>
+      <button onclick="showDetails()">View Details</button>
+    </div>
+
+    <div class="game-card">
+      <div class="game-image">
+  <img src="https://cdn.wallpapersafari.com/51/4/fHu3eWT.jpg" alt="Speed Legends">
+</div>
+      <h3>Speed Legends</h3>
+      <p>Racing • Multiplayer</p>
+      <button>Play Now</button>
+      <button onclick="showDetails('speed')">View Details</button>
+    </div>
+
+    <div class="game-card">
+      <div class="game-image">
+  <img src="https://ik.imagekit.io/cr32zgyto/14/1714255071369_G3nOsQBTpc.jpg" alt="Battle Kingdom">
+</div>
+      <h3>Battle Kingdom</h3>
+      <p>Adventure • Strategy</p>
+      <button>Play Now</button>
+      <button onclick="showDetails('battle')">View Details</button>
+    </div>
+
+  </div>
+</section>
+<section class="about" id="about">
+  <h2>About Nexora Gaming</h2>
+
+  <p>
+    Nexora Gaming is a place for gamers to discover exciting games,
+    explore new worlds and enjoy an amazing gaming experience.
+  </p>
+
+  <div class="about-features">
+    <div class="feature">
+      <h3>🎮 Discover Games</h3>
+      <p>Explore different games and find your next favourite.</p>
+    </div>
+
+    <div class="feature">
+      <h3>⚡ Fast Experience</h3>
+      <p>Enjoy a clean and simple gaming website experience.</p>
+    </div>
+
+    <div class="feature">
+      <h3>🌎 Explore Worlds</h3>
+      <p>Discover exciting adventures, racing and action games.</p>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+
+  <div class="footer-content">
+
+    <div>
+      <h2>Nexora Gaming</h2>
+      <p>Level up your gaming experience.</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <a href="#home">Home</a>
+      <a href="#games">Games</a>
+      <a href="#about">About</a>
+    </div>
+
+    <div>
+      <h3>Follow Us</h3>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Discord</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Nexora Gaming. All Rights Reserved.</p>
+  </div>
+
+</footer>
+<div class="login-popup" id="loginPopup">
+  <div class="login-box">
+    <span class="close-btn" onclick="closeLogin()">×</span>
+
+    <h2>Login</h2>
+
+    <input type="text" placeholder="Username or Email">
+    <input type="password" placeholder="Password">
+
+   <button onclick="loginUser()">Login</button>
+  </div>
+</div>
+<div class="details-popup" id="detailsPopup">
+  <div class="details-box">
+
+    <span class="details-close" onclick="closeDetails()">×</span>
+    <div class="details-image">
+  <img id="detailsGameImage" src="" alt="Game Image">
+</div>
+
+    <h2>Cyber Strike</h2>
+
+    <p>
+      Cyber Strike is an action-packed futuristic multiplayer game
+      where players battle in a high-tech world.
+    </p>
+
+    <div class="details-info">
+      <p><strong>Genre:</strong> Action • Multiplayer</p>
+      <p><strong>Players:</strong> Multiplayer</p>
+      <p><strong>Platform:</strong> PC • Console</p>
+      <p><strong>Rating:</strong> ⭐ 4.7/5</p>
+    </div>
+
+    <button onclick="closeDetails()">Close</button>
+
+  </div>
+</div>
+<script>
+function searchGames() {
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let cards = document.querySelectorAll(".game-card");
+
+  cards.forEach(function(card) {
+    let gameName = card.querySelector("h3").textContent.toLowerCase();
+
+    if (gameName.includes(input)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+function toggleMenu() {
+  document.getElementById("dropdown-menu").classList.toggle("show");
+}
+function openLogin() {
+  document.getElementById("loginPopup").style.display = "flex";
+}
+
+function closeLogin() {
+  document.getElementById("loginPopup").style.display = "none";
+}
+let image = document.getElementById("detailsGameImage");
+function showDetails(game) {
+  let title = document.querySelector(".details-box h2");
+  let description = document.querySelector(".details-box > p");
+  let info = document.querySelector(".details-info");
+  let image = document.getElementById("detailsGameImage");
+
+  if (game === "speed") {
+    title.textContent = "Speed Legends";
+
+    description.textContent =
+      "Speed Legends is a fast-paced racing game where players compete on exciting tracks.";
+image.src = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3422100/c813fda9a4c0444b2f14cde320df3a6442f33759/ss_c813fda9a4c0444b2f14cde320df3a6442f33759.1920x1080.jpg?t=1754516262";
+    info.innerHTML = `
+      <p><strong>Genre:</strong> Racing • Multiplayer</p>
+      <p><strong>Players:</strong> Multiplayer</p>
+      <p><strong>Platform:</strong> PC • Console</p>
+      <p><strong>Rating:</strong> ⭐ 4.6/5</p>
+    `;
+
+  } else if (game === "battle") {
+    title.textContent = "Battle Kingdom";
+image.src = "https://images.gog.com/7bba8193dde7536eaa8a322a5d745b4bde315c92269e6df48a66ee4d4b0aea90.webp?namespace=gamesdb";
+    description.textContent =
+      "Battle Kingdom is an adventure strategy game where players build their kingdom and face challenging battles.";
+
+    info.innerHTML = `
+      <p><strong>Genre:</strong> Adventure • Strategy</p>
+      <p><strong>Players:</strong> Single Player</p>
+      <p><strong>Platform:</strong> PC • Console</p>
+      <p><strong>Rating:</strong> ⭐ 4.8/5</p>
+    `;
+
+  } else {
+    title.textContent = "Cyber Strike";
+
+    description.textContent =
+      "Cyber Strike is an action-packed futuristic multiplayer game where players battle in a high-tech world.";
+
+    info.innerHTML = `
+      <p><strong>Genre:</strong> Action • Multiplayer</p>
+      <p><strong>Players:</strong> Multiplayer</p>
+      <p><strong>Platform:</strong> PC • Console</p>
+      <p><strong>Rating:</strong> ⭐ 4.7/5</p>
+    `;
+    image.src = "https://s.widget-club.com/images/YyiR86zpwIMIfrCZoSs4ulVD9RF3/699100a6ce07d98b3862f17243cdf26e/7525c3f7b198bd7844c5ebefff37e327.jpg";
+  }
+
+  document.getElementById("detailsPopup").style.display = "flex";
+}
+function closeDetails() {
+  document.getElementById("detailsPopup").style.display = "none";
+}
+function loginUser() {
+  document.getElementById("loginPopup").style.display = "none";
+
+  document.getElementById("games").style.display = "block";
+
+  document.getElementById("games").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+</script>
+
+</body>
+</html>
