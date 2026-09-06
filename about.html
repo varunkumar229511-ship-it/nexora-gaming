@@ -5,7 +5,13 @@
     <title> Nexora Gaming</title>
 <style> 
 body {
-  background-color: gray;
+  background:
+    linear-gradient(rgba(5, 12, 22, 0.82), rgba(5, 12, 22, 0.82)),
+    url("about-bg.png");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 header {
   display: flex;
@@ -345,7 +351,11 @@ header {
 }
 .about {
   padding: 60px 24px;
-  background: #10141a;
+  background:
+    linear-gradient(rgba(5, 12, 22, 0.45), rgba(5, 12, 22, 0.45)),
+    url("about.bg.png");
+  background-size: cover;
+  background-position: center;
   text-align: center;
 }
 
@@ -552,25 +562,25 @@ footer {
 
     <div class="game-card">
       <div class="game-image">
-  <img src="https://ik.imagekit.io/cr32zgyto/14/1714255071369_G3nOsQBTpc.jpg" alt="Battle Kingdom">
-</div>
+       <img src="https://ik.imagekit.io/cr32zgyto/14/1714255071369_G3nOsQBTpc.jpg" alt="Battle Kingdom">
+    </div>
       <h3>Battle Kingdom</h3>
       <p>Adventure • Strategy</p>
       <button>Play Now</button>
       <button onclick="showDetails('battle')">View Details</button>
     </div>
 
-  </div>
-</section>
-<section class="about" id="about">
-  <h2>About Nexora Gaming</h2>
+    </div>
+   </section>
+   <section class="about" id="about">
+   <h2>About Nexora Gaming</h2>
 
-  <p>
+   <p>
     Nexora Gaming is a place for gamers to discover exciting games,
     explore new worlds and enjoy an amazing gaming experience.
-  </p>
+   </p>
 
-  <div class="about-features">
+   <div class="about-features">
     <div class="feature">
       <h3>🎮 Discover Games</h3>
       <p>Explore different games and find your next favourite.</p>
@@ -585,11 +595,11 @@ footer {
       <h3>🌎 Explore Worlds</h3>
       <p>Discover exciting adventures, racing and action games.</p>
     </div>
-  </div>
-</section>
-<footer class="footer">
+   </div>
+   </section>
+   <footer class="footer">
 
-  <div class="footer-content">
+   <div class="footer-content">
 
     <div>
       <h2>Nexora Gaming</h2>
@@ -610,15 +620,15 @@ footer {
       <a href="#">Discord</a>
     </div>
 
-  </div>
+   </div>
 
-  <div class="footer-bottom">
+    <div class="footer-bottom">
     <p>© 2026 Nexora Gaming. All Rights Reserved.</p>
-  </div>
+    </div>
 
-</footer>
-<div class="login-popup" id="loginPopup">
-  <div class="login-box">
+   </footer>
+   <div class="login-popup" id="loginPopup">
+    <div class="login-box">
     <span class="close-btn" onclick="closeLogin()">×</span>
 
     <h2>Login</h2>
@@ -627,15 +637,15 @@ footer {
     <input type="password" placeholder="Password">
 
    <button onclick="loginUser()">Login</button>
-  </div>
-</div>
-<div class="details-popup" id="detailsPopup">
-  <div class="details-box">
+   </div>
+    </div>
+   <div class="details-popup" id="detailsPopup">
+     <div class="details-box">
 
     <span class="details-close" onclick="closeDetails()">×</span>
     <div class="details-image">
-  <img id="detailsGameImage" src="" alt="Game Image">
-</div>
+    <img id="detailsGameImage" src="" alt="Game Image">
+   </div>
 
     <h2>Cyber Strike</h2>
 
@@ -653,96 +663,95 @@ footer {
 
     <button onclick="closeDetails()">Close</button>
 
-  </div>
-</div>
-<script>
-function searchGames() {
-  let input = document.getElementById("searchInput").value.toLowerCase();
-  let cards = document.querySelectorAll(".game-card");
+    </div>
+   </div>
+   <script>
+     function searchGames() {
+     let input = document.getElementById("searchInput").value.toLowerCase();
+     let cards = document.querySelectorAll(".game-card");
 
-  cards.forEach(function(card) {
-    let gameName = card.querySelector("h3").textContent.toLowerCase();
+     cards.forEach(function(card) {
+     let gameName = card.querySelector("h3").textContent.toLowerCase();
 
-    if (gameName.includes(input)) {
+     if (gameName.includes(input)) {
       card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
-function toggleMenu() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-function openLogin() {
-  document.getElementById("loginPopup").style.display = "flex";
-}
+     } else {
+        card.style.display = "none";
+     }
+     });
+     }
+     function toggleMenu() {
+     document.getElementById("dropdown-menu").classList.toggle("show");
+     }
+     function openLogin() {
+      document.getElementById("loginPopup").style.display = "flex";
+     }
 
-function closeLogin() {
-  document.getElementById("loginPopup").style.display = "none";
-}
-let image = document.getElementById("detailsGameImage");
-function showDetails(game) {
-  let title = document.querySelector(".details-box h2");
-  let description = document.querySelector(".details-box > p");
-  let info = document.querySelector(".details-info");
-  let image = document.getElementById("detailsGameImage");
+     function closeLogin() {
+     document.getElementById("loginPopup").style.display = "none";
+     }
+     let image = document.getElementById("detailsGameImage");
+     function showDetails(game) {
+     let title = document.querySelector(".details-box h2");
+     let description = document.querySelector(".details-box > p");
+     let info = document.querySelector(".details-info");
+     let image = document.getElementById("detailsGameImage");
+ 
+     if (game === "speed") {
+     title.textContent = "Speed Legends";
 
-  if (game === "speed") {
-    title.textContent = "Speed Legends";
-
-    description.textContent =
+     description.textContent =
       "Speed Legends is a fast-paced racing game where players compete on exciting tracks.";
-image.src = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3422100/c813fda9a4c0444b2f14cde320df3a6442f33759/ss_c813fda9a4c0444b2f14cde320df3a6442f33759.1920x1080.jpg?t=1754516262";
-    info.innerHTML = `
+     image.src = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3422100/c813fda9a4c0444b2f14cde320df3a6442f33759/ss_c813fda9a4c0444b2f14cde320df3a6442f33759.1920x1080.jpg?t=1754516262";
+     info.innerHTML = `
       <p><strong>Genre:</strong> Racing • Multiplayer</p>
       <p><strong>Players:</strong> Multiplayer</p>
       <p><strong>Platform:</strong> PC • Console</p>
       <p><strong>Rating:</strong> ⭐ 4.6/5</p>
-    `;
+     `;
 
-  } else if (game === "battle") {
-    title.textContent = "Battle Kingdom";
-image.src = "https://images.gog.com/7bba8193dde7536eaa8a322a5d745b4bde315c92269e6df48a66ee4d4b0aea90.webp?namespace=gamesdb";
-    description.textContent =
+     } else if (game === "battle") {
+     title.textContent = "Battle Kingdom";
+     image.src = "https://images.gog.com/7bba8193dde7536eaa8a322a5d745b4bde315c92269e6df48a66ee4d4b0aea90.webp?namespace=gamesdb";
+     description.textContent =
       "Battle Kingdom is an adventure strategy game where players build their kingdom and face challenging battles.";
 
-    info.innerHTML = `
+     info.innerHTML = `
       <p><strong>Genre:</strong> Adventure • Strategy</p>
       <p><strong>Players:</strong> Single Player</p>
       <p><strong>Platform:</strong> PC • Console</p>
       <p><strong>Rating:</strong> ⭐ 4.8/5</p>
-    `;
+     `;
 
-  } else {
-    title.textContent = "Cyber Strike";
+     } else {
+     title.textContent = "Cyber Strike";
 
-    description.textContent =
+     description.textContent =
       "Cyber Strike is an action-packed futuristic multiplayer game where players battle in a high-tech world.";
 
-    info.innerHTML = `
+     info.innerHTML = `
       <p><strong>Genre:</strong> Action • Multiplayer</p>
       <p><strong>Players:</strong> Multiplayer</p>
       <p><strong>Platform:</strong> PC • Console</p>
       <p><strong>Rating:</strong> ⭐ 4.7/5</p>
-    `;
-    image.src = "https://s.widget-club.com/images/YyiR86zpwIMIfrCZoSs4ulVD9RF3/699100a6ce07d98b3862f17243cdf26e/7525c3f7b198bd7844c5ebefff37e327.jpg";
-  }
+     `;
+      image.src = "https://s.widget-club.com/images/YyiR86zpwIMIfrCZoSs4ulVD9RF3/699100a6ce07d98b3862f17243cdf26e/7525c3f7b198bd7844c5ebefff37e327.jpg";
+     }
 
-  document.getElementById("detailsPopup").style.display = "flex";
-}
-function closeDetails() {
-  document.getElementById("detailsPopup").style.display = "none";
-}
-function loginUser() {
-  document.getElementById("loginPopup").style.display = "none";
+      document.getElementById("detailsPopup").style.display = "flex";
+     }
+     function closeDetails() {
+     document.getElementById("detailsPopup").style.display = "none";
+     }
+     function loginUser() {
+     document.getElementById("loginPopup").style.display = "none";
 
-  document.getElementById("games").style.display = "block";
+     document.getElementById("games").style.display = "block";
 
-  document.getElementById("games").scrollIntoView({
-    behavior: "smooth"
-  });
-}
-</script>
-
-</body>
+      document.getElementById("games").scrollIntoView({
+      behavior: "smooth"
+     });
+     }
+   </script>
+ </body>
 </html>

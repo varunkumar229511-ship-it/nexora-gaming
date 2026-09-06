@@ -4,9 +4,15 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora Gaming</title>
    <style> 
-      body {
-        background-color: gray;
-      }
+     body {
+       background:
+       linear-gradient(rgba(5, 12, 22, 0.82), rgba(5, 12, 22, 0.82)),
+       url("games-bg.png");
+
+       background-size: cover;
+       background-position: center;
+       background-attachment: fixed;
+     }
       header {
        display: flex;
        justify-content: space-between;
@@ -22,8 +28,11 @@
        gap: 16px;
       }
       .menu-wrapper {
-       position: relative;
-      }
+        position: relative;
+       display: flex;
+        align-items: center;
+       gap: 16px;
+      } 
       .menu-btn {
        background: none;
        border: none;
@@ -47,6 +56,7 @@
        border: 1px solid #232a35;
        border-radius: 8px;
        min-width: 160px;
+       z-index: 9999;
       }
 
       .dropdown.show {
@@ -62,6 +72,7 @@
        display: flex;
        align-items: center;
        gap: 12px;
+       margin-left: auto;
       }
       .search-btn {
        background: none;
@@ -79,13 +90,75 @@
        font-weight: 600;
       }
       .hero {
-       min-height: 450px;
+       min-height: 520px;
        display: flex;
-       justify-content: center;
        align-items: center;
-       text-align: center;
-       background: #10141a;
-       padding: 40px 20px;
+       text-align: left;
+       padding: 50px 7%;
+       position: relative;
+       overflow: hidden;
+
+       background:
+       linear-gradient(
+       90deg,
+       rgba(5, 12, 22, 0.98) 0%,
+       rgba(5, 12, 22, 0.85) 35%,
+       rgba(5, 12, 22, 0.25) 75%,
+       rgba(5, 12, 22, 0.15) 100%
+       ),
+       url("hero-bg.png");
+
+       background-size: cover;
+       background-position: center;
+      }
+
+      .hero-content {
+       max-width: 550px;
+       z-index: 2;
+      }
+
+      .hero-tag {
+       display: block;
+       color: #4fd1c5;
+       font-size: 0.9rem;
+       font-weight: bold;
+       letter-spacing: 4px;
+       margin-bottom: 18px;
+     }
+
+     .hero-content h1 {
+       font-size: 4rem;
+       line-height: 1.05;
+       color: white;
+       margin-bottom: 20px;
+     }
+
+     .hero-content h1 span {
+       color: #4fd1c5;
+     }
+
+     .hero-content p {
+       color: #d0d7e2;
+       font-size: 1.1rem;
+       line-height: 1.7;
+       margin-bottom: 30px;
+     }
+
+     .play-btn {
+       background: #4fd1c5;
+       color: #061018;
+       border: none;
+       padding: 15px 30px;
+       border-radius: 30px;
+       font-size: 1rem;
+       font-weight: bold;
+       cursor: pointer;
+       transition: 0.3s;
+      }
+
+     .play-btn:hover {
+       transform: translateY(-3px);
+       box-shadow: 0 8px 25px rgba(79, 209, 197, 0.35);
       }
       .hero-content h1 {
        font-size: 3rem;
@@ -318,9 +391,13 @@
       }
       .about {
        padding: 60px 24px;
-       background: #10141a;
+       background:
+        linear-gradient(rgba(5, 12, 22, 0.45), rgba(5, 12, 22, 0.45)),
+       url("about.bg.png");
+       background-size: cover;
+       background-position: center;
        text-align: center;
-      }
+     }
       .about h2 {
        color: #4fd1c5;
        font-size: 2rem;
@@ -470,21 +547,57 @@
        cursor: pointer;
        font-weight: bold;
       }
+      #speedCanvas {
+       width: 100%;
+       max-width: 500px;
+       height: auto;
+       display: block;
+       margin: 15px auto;
+       touch-action: none;
+      }
+      .speed-controls {
+        display: flex;
+       justify-content: space-between;
+       align-items: center;
+       width: 100%;
+       max-width: 500px;
+       margin: -70px auto 20px;
+       position: relative;
+       z-index: 10;
+       pointer-events: none;
+      }
+      .control-left,
+      .control-right {
+        display: flex;
+       gap: 10px;
+       pointer-events: auto;
+      }
+     .speed-controls button {
+       width: 55px;
+       height: 55px;
+       border: none;
+       border-radius: 50%;
+       background: #4fd1c5;
+       font-size: 1.3rem;
+       cursor: pointer;
+       touch-action: none;
+      }
+      .speed-controls button:active {
+        transform: scale(0.9);
+      }
    </style>
  </head>
  <body>
    <header>
-     <div class="menu-wrapper">
-       <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+     <div class="left-group">
+       <div class="menu-wrapper">
+         <button class="menu-btn" onclick="toggleMenu()">⋮</button>
          <div class="dropdown" id="dropdown-menu">
-         <a href="#home">Home</a>
-         <a href="#games">Games</a>
-         <a href="#about">About</a>
-         <div class="dropdown" id="dropdown-menu">
-         <a href="index.html">Home</a>
-         <a href="games.html">Games</a>
-         <a href="about.html">About</a>
-       </div>  
+           <a href="index.html">Home</a>
+           <a href="gaming.html">Games</a>
+           <a href="about.html">About</a>
+         </div>
+       </div>
        <span class="logo">Nexora Gaming</span>
      </div>
      <div class="right-actions">
@@ -494,15 +607,23 @@
        class="search-input"
        placeholder="Search games..."
        onkeyup="searchGames()">
-       <button class="login-btn" onclick="openLogin()">Login</button>
-      </div>
+       <button class="login-btn" disabled>Login</button>
+     </div>
    </header>
    <section class="hero" id="home">
      <div class="hero-content">
-       <h1>Welcome to Nexora Gaming</h1>
-       <p>Discover games, explore new worlds and level up your gaming experience.</p>
-       <button class="play-btn" onclick="openLogin()">
-         Explore Games
+       <span class="hero-tag">FIGHT • EXPLORE • CONQUER</span>
+       <h1>
+         Welcome to <br>
+         <span>Nexora Gaming</span>
+       </h1>
+       <p>
+         Step into a world of epic battles, powerful warriors,
+         racing adventures and exciting games.
+         Choose your game and start your adventure today.
+       </p>
+       <button class="play-btn" onclick="window.location.href='gaming.html'">
+          🎮 explor games→
        </button>
      </div>
    </section>
@@ -533,7 +654,7 @@
          </div>
          <h3>Battle Kingdom</h3>
          <p>Adventure • Strategy</p>
-         <button>Play Now</button>
+         <button onclick="playBattleKingdom()">Play Now</button>          
          <button onclick="showDetails('battle')">View Details</button>
        </div>
      </div>
@@ -571,10 +692,10 @@
          <a href="#about">About</a>
        </div>
        <div>
-         <h3>Follow Us</h3>
-         <a href="#">Instagram</a>
-         <a href="#">YouTube</a>
-         <a href="#">Discord</a>
+         <h3>Contact Us</h3>
+         <a href="https://www.instagram.com/varungautam_18/" target="_blank">📸 Instagram: @varungautam_18</a>
+         <a href="mailto:varunkumar229511@email.com">📧 Email: varunkumar229511@email.com</a>
+         <a href="tel:+918447XXX621">📞 Phone: +91 8447XXX621</a>
        </div>
      </div>
      <div class="footer-bottom">
@@ -634,9 +755,30 @@
        </p>
        <p>Time: <span id="speedTime">30</span>s</p>
        <canvas id="speedCanvas" width="500" height="300"></canvas>
+       <div class="speed-controls" id="speedControls" style="display: none;">
+         <div class="control-left">
+           <button onclick="moveCarLeft()">⬅️</button>
+           <button onclick="moveCarRight()">➡️</button>
+         </div>
+         <div class="control-right">
+           <button id="brakeButton">🛑</button>
+           <button id="raceButton">🏁</button>
+         </div>
+       </div>
        <button onclick="startSpeedGame()">Start Game</button>
        <button onclick="startSpeedGame()">🔄 Restart</button>
        <button onclick="closeSpeedGame()">Close</button>
+     </div>
+   </div> 
+   <div id="battleGamePopup" class="game-popup">
+     <div class="game-box">
+       <h2>🏰 Battle Kingdom</h2>
+       <p>❤️ Your Health: <span id="playerHealth">100</span></p>
+       <canvas id="battleCanvas" width="600" height="350"></canvas>
+       <button onclick="playerAttack()">⚔️ Attack</button>
+       <button onclick="enemyAttack()">👹 Enemy Attack</button>
+       <button onclick="startBattleGame()">⚔️ Start Battle</button>
+       <button onclick="closeBattleGame()">Close</button>
      </div>
    </div>
    <script>
@@ -804,12 +946,32 @@
        document.getElementById("speedGamePopup").style.display = "none";
       }
       let speedTimer;
+      let enemyX = 200;
+      let enemyY = -80;
+
+      let enemy2X = 400;
+      let enemy2Y = -300;
+
+      let carX = 275;
+      let carY = 220;
+
       let distance = 0;
+      let racePressed = false;
+      let brakePressed = false;
+      let speedGameRunning = false;
       function startSpeedGame() {
        speedGameRunning = true;
-       carY = 330;
+       document.getElementById("speedControls").style.display = "flex";
+       carY = 220;
        carMovingUp = true;
        distance = 0;
+       racePressed = false;
+       brakePressed = false;
+       carX = 275;
+       enemyX = 200;
+       enemyY = -80;
+       enemy2X = 400;
+       enemy2Y = -300;
        document.getElementById("speedFinalResult").style.display = "none";
        document.getElementById("speedScore").textContent = "0";
        document.getElementById("speedTime").textContent = "30";
@@ -818,22 +980,12 @@
        let timeLeft = 30;
        speedTimer = setInterval(function() {
          timeLeft--;
-         document.getElementById("speedTime").textContent = timeLeft;
-         if (timeLeft <= 0) {
-           clearInterval(speedTimer);
-           speedGameRunning = false;
-           document.getElementById("finalSpeedScore").textContent =
-           Math.floor(distance * 100);
-           document.getElementById("finalSpeedDistance").textContent =
-           distance.toFixed(1);
-           document.getElementById("speedFinalResult").style.display = "block";
-          }
+         document.getElementById("speedTime").textContent = timeLeft;           
+          
         }, 1000);
       }
       const speedCanvas = document.getElementById("speedCanvas");
       const speedCtx = speedCanvas.getContext("2d");
-      let carX = 275;
-      let carY = 330;
       let carMovingUp = true;
       let roadOffset = 0;
       function drawSpeedGame() {
@@ -965,18 +1117,21 @@
          alert("💥 Crash!");
         }
       }
-      let enemyX = 200;
-     let enemyY = -80;
      let enemySpeed = 4;
-     let speedGameRunning = false;
-     let enemy2X = 400;
-     let enemy2Y = -300;
      setInterval(function() {
        if (!speedGameRunning) return;
-       enemyY += enemySpeed;
+       if (racePressed) {
+         enemySpeed = 6 + distance * 0.08;
+        }
+       else if (brakePressed) {
+         enemySpeed = 2;
+        }
+        else {
+         enemySpeed = 4 + distance * 0.08;
+        }
+        enemyY += enemySpeed;
        enemy2Y += enemySpeed;
        distance += 0.01;
-       enemySpeed = 4 + distance * 0.08;
        document.getElementById("speedScore").textContent =
        Math.floor(distance * 100);
        document.getElementById("speedDistance").textContent =
@@ -1015,6 +1170,129 @@
         }
        drawSpeedGame();
       });
+      function moveCarLeft() {
+       if (!speedGameRunning) return;
+       carX -= 25;
+       if (carX < 0) {
+         carX = 0;
+        }
+      }
+      function moveCarRight() {
+       if (!speedGameRunning) return;
+       carX += 25;
+       if (carX > speedCanvas.width - 50) {
+         carX = speedCanvas.width - 50;
+        }
+      }
+     function raceCar() {
+       if (!speedGameRunning) return;
+       racePressed = true;
+      }
+     function brakeCar() {
+       if (!speedGameRunning) return;
+       brakePressed = true;
+      }
+      const raceButton = document.getElementById("raceButton");
+      const brakeButton = document.getElementById("brakeButton");
+      raceButton.addEventListener("pointerdown", function() {
+       if (speedGameRunning) {
+         racePressed = true;
+        }
+      });
+     raceButton.addEventListener("pointerup", function() {
+       racePressed = false;
+     });
+     raceButton.addEventListener("pointercancel", function() {
+       racePressed = false;
+      });
+     brakeButton.addEventListener("pointercancel", function() {
+       brakePressed = false;
+     });
+     raceButton.addEventListener("pointerleave", function() {
+       racePressed = false;
+     });
+     brakeButton.addEventListener("pointerdown", function() {
+       if (speedGameRunning) {
+         brakePressed = true;
+        }
+     });
+     brakeButton.addEventListener("pointerup", function() {
+       brakePressed = false;
+     });
+     brakeButton.addEventListener("pointerleave", function() {
+       brakePressed = false;
+     });
+     function playBattleKingdom() {
+       document.getElementById("battleGamePopup").style.display = "flex";
+     }
+     const battleCanvas = document.getElementById("battleCanvas");
+     const battleCtx = battleCanvas.getContext("2d");
+     let playerX = 100;
+     let battleStarted = false;
+
+     function drawBattleGame() {
+       battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
+       // Background
+       battleCtx.fillStyle = "#1a1a2e";
+       battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
+       // Ground
+       battleCtx.fillStyle = "#2d6a4f";
+       battleCtx.fillRect(0, 280, battleCanvas.width, 70);
+       // Player
+       battleCtx.font = "70px Arial";
+       battleCtx.fillText("🧙‍♂️", playerX, 270);
+       // Enemy
+       battleCtx.fillText("👹", 450, 270);
+     }
+     drawBattleGame();
+     function closeBattleGame() {
+       document.getElementById("battleGamePopup").style.display = "none";
+     }
+     function startBattleGame() {
+        battleStarted = true;
+       document.getElementById("playerHealth").textContent = "100";
+       document.getElementById("enemyHealth").textContent = "100";
+       alert("⚔️ Battle Started!");
+     }
+     function playerAttack() {
+       if (!battleStarted) return;
+       let enemyHealth = document.getElementById("enemyHealth");
+       let health = Number(enemyHealth.textContent);
+       if (health > 0) {
+         health -= 20;
+         enemyHealth.textContent = health;
+       }
+       if (health <= 0) {
+         alert("🏆 You Win!");
+       }
+     }
+     document.addEventListener("keydown", function(event) {
+       if (event.key === "ArrowLeft") {
+         playerX -= 10;
+       }
+       if (event.key === "ArrowRight") {
+         playerX += 10;
+       }
+       if (playerX < 0) {
+         playerX = 0;
+       }
+       if (playerX > battleCanvas.width - 70) {
+         playerX = battleCanvas.width - 70;
+       }
+       drawBattleGame();
+     });
+     function enemyAttack() {
+       if (!battleStarted) return;
+       let playerHealth = document.getElementById("playerHealth");
+       let health = Number(playerHealth.textContent);
+       if (health > 0) {
+         health -= 15;
+         playerHealth.textContent = health;
+       }
+       if (health <= 0) {
+         alert("💀 You Lose!");
+       }
+     }
    </script>
  </body>
 </html>

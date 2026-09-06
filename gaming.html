@@ -5,7 +5,12 @@
     <title> Nexora Gaming</title>
 <style> 
 body {
-  background-color: gray;
+  background:
+    linear-gradient(rgba(5, 12, 22, 0.15), rgba(5, 12, 22, 0.75)),
+    url("game.bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 header {
   display: flex;
@@ -111,10 +116,9 @@ header {
 }
 .games {
   padding: 50px 24px;
-  background: #171d26;
+  background: transparent;
   text-align: center;
 }
-
 .games h2 {
   color: #e8ecf1;
   font-size: 2rem;
@@ -514,8 +518,7 @@ footer {
   placeholder="Search games..."
   onkeyup="searchGames()"
 >
-<button class="login-btn" onclick="openLogin()">Login</button></div>
-</header>
+<button class="login-btn" disabled>Login</button></header>
 <section class="hero" id="home">
   <div class="hero-content">
     <h1>Welcome to Nexora Gaming</h1>
@@ -674,7 +677,7 @@ function toggleMenu() {
   document.getElementById("dropdown-menu").classList.toggle("show");
 }
 function openLogin() {
-  document.getElementById("loginPopup").style.display = "flex";
+  return;
 }
 
 function closeLogin() {
